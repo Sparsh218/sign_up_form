@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { StringCompare } from './validators/compare-validator';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,6 +27,8 @@ export class AppComponent implements OnInit{
       password: ["",[Validators.required, Validators.minLength(6)]],
       confirmPassword: ["",Validators.required],
       tcs: [false,Validators.required],
+    } , {
+      validators: StringCompare("password","confirmPassword")
     });
 
   }
