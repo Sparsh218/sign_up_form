@@ -26,14 +26,14 @@ export class AppComponent implements OnInit{
       email: ["",[Validators.required, Validators.email]],
       password: ["",[Validators.required, Validators.minLength(6)]],
       confirmPassword: ["",Validators.required],
-      tcs: [false,Validators.required],
+      tcs: [false,Validators.requiredTrue],
     } , {
       validators: StringCompare("password","confirmPassword")
     });
 
   }
 
-  get registerFormControl() {
+  get rfc() {
     
     return this.registerForm.controls;
 
@@ -46,9 +46,12 @@ export class AppComponent implements OnInit{
 
   onSubmit() {
     this.submitted = true;
+    console.log("submit clicked");
     if (this.registerForm.invalid) {
       return;
     }
+    alert("Register Success");
+    this.onReset();
   }
 
 }

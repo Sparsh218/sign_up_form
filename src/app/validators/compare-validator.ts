@@ -5,8 +5,8 @@ export function StringCompare (
     compareString: string
 ) {
     return (formGroup: FormGroup) => {
-        const first = this.formGroup.controls["firstString"];
-        const second = this.formGroup.controls["compareString"];
+        const first = formGroup.controls[firstString];
+        const second = formGroup.controls[compareString];
 
         if (first.value !== second.value) {
             second.setErrors({mustmatch: true});

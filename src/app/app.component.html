@@ -10,9 +10,11 @@
           <div class="form-group col-6">
             <label>First Name</label>
             <input type="text" class="form-control" 
-            formControlName="firstName"/>
-            <div class="text-warning">
-              <div>
+            formControlName="firstName"
+            [ngClass]=" {'is-invalid' : submitted && rfc.firstName.errors} "
+            />
+            <div *ngIf=" submitted && rfc.firstName.errors" class="text-warning">
+              <div *ngIf="rfc.firstName.errors.required">
                 First Name is required
               </div>
             </div>
@@ -20,9 +22,10 @@
           <div class="form-group col-6">
             <label>Last Name</label>
             <input type="text" class="form-control"
+            [ngClass]=" {'is-invalid' : submitted && rfc.lastName.errors} "
             formControlName="lastName" />
-            <div class="text-warning">
-              <div>
+            <div *ngIf=" submitted && rfc.lastName.errors" class="text-warning">
+              <div *ngIf="rfc.lastName.errors.required">
                 Last Name is required
               </div>
             </div>
@@ -31,28 +34,26 @@
         <div class="form-group">
           <label>Email</label>
           <input type="text" class="form-control"
+          [ngClass]=" {'is-invalid' : submitted && rfc.email.errors} "
           formControlName="email" />
-          <div class="text-warning">
-            <div>Email is required</div>
-            <div>
+          <div *ngIf=" (rfc.email.touched || submitted) && rfc.email.errors" class="text-warning">
+            <div *ngIf="rfc.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="rfc.email.errors.email">
               Email must be a valid email address
             </div>
           </div>
         </div>
-
-        <ng-container>
-          <div class="text-danger">
-            Value is required.
-          </div>
-        </ng-container>
         <div class="form-row">
           <div class="form-group col">
             <label>Password</label>
             <input type="password" class="form-control"
+            [ngClass]=" {'is-invalid' : submitted && rfc.password.errors} "
             formControlName="password" />
-            <div class="text-warning">
-              <div>Password is required</div>
-              <div>
+            <div *ngIf=" (rfc.password.touched || submitted) && rfc.password.errors" class="text-warning">
+              <div *ngIf="rfc.password.errors.required">Password is required</div>
+              <div *ngIf="rfc.password.errors.minlength">
                 Password must be at least 6 characters
               </div>
             </div>
@@ -60,12 +61,13 @@
           <div class="form-group col">
             <label>Confirm Password</label>
             <input type="password" class="form-control" 
+            [ngClass]=" {'is-invalid' : submitted && rfc.confirmPassword.errors} "
             formControlName="confirmPassword"/>
-            <div class="text-warning">
-              <div>
+            <div *ngIf=" (rfc.password.touched || submitted) && rfc.confirmPassword.errors" class="text-warning">
+              <div *ngIf="rfc.confirmPassword.errors.required">
                 Confirm Password is required
               </div>
-              <div>
+              <div *ngIf="rfc.confirmPassword.errors.mustmatch">
                 Passwords must match
               </div>
             </div>
@@ -73,11 +75,12 @@
         </div>
         <div class="form-group form-check">
           <input type="checkbox" id="acceptTerms" class="form-check-input"
+          [ngClass]=" {'is-invalid' : submitted && rfc.tcs.errors} "
           formControlName="tcs" />
           <label for="acceptTerms" class="form-check-label"
             >Accept Terms & Conditions</label
           >
-          <div class="text-warning">
+          <div *ngIf="submitted && rfc.tcs.errors.required" class="text-warning">
             Accept Ts & Cs is required
           </div>
         </div>
@@ -86,8 +89,6 @@
           <button class="btn btn-warning" type="reset" (click)="onReset()">
             Reset
           </button>
-          <p class="text white">Value: {{ registerForm.value | json }}</p>
-          <p class="text white">Value: {{ registerForm.valid | json }}</p>
         </div>
       </form>
     </div>
